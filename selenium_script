@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 
-url = "./view/index.html"  # Updated path to HTML file
+url = "view/index.html"  # Updated path to HTML file
 
 # Configuring Chrome WebDriver options
 options = webdriver.ChromeOptions()
