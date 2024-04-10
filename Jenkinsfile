@@ -14,12 +14,20 @@ pipeline {
                 }
             }
         }
-        stage("deploy") {
-            steps {
-                script {
-                    // Run the Docker container from the built image
-                    sh "docker run -p 3000:3000 node-app:latest"
+         stage("push"){
+            steps{
+                withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
+                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
+                sh "docker tag node-app-test-new:latest ${env.dockerHubUser}/node-app-test-new:latest"
+                sh "docker push ${env.dockerHubUser}/node-app-test-new:latest"
+                echo 'image push ho gaya'
                 }
+            }
+        }
+        stage("deploy"){
+            steps{
+                sh "docker-compose down && docker-compose up -d"
+                echo 'deployment ho gayi'
             }
         }
     }
