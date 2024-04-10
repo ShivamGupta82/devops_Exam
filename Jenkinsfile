@@ -21,5 +21,15 @@ pipeline {
                 }
             }
         }
+        stage('echo') {
+            when {
+                expression {
+                    return currentBuild.result == 'SUCCESS'
+                }
+            }
+            steps {
+                    echo "test is success"
+            }
+        }
     }
 }
