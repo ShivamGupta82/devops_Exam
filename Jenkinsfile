@@ -9,7 +9,7 @@ pipeline {
         stage('build') {
             steps {
                      echo "test was a success"
-                     sh "docker build -t node-app"
+                     sh "docker build -t node-app ."
             }
         }
     }
