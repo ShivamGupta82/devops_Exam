@@ -6,7 +6,7 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Test') {
+        stage('test') {
             steps {
                 script {
                     // Run Python Selenium script
@@ -21,14 +21,15 @@ pipeline {
                 }
             }
         }
-        stage('echo') {
+        stage('build') {
             when {
                 expression {
                     return currentBuild.result == 'SUCCESS'
                 }
             }
             steps {
-                    echo "test is success"
+                     echo "test was a success"
+                     sh "docker build -t node-app"
             }
         }
     }
